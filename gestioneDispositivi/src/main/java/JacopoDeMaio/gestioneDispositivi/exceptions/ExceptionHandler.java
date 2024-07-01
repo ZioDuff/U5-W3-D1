@@ -29,4 +29,16 @@ public class ExceptionHandler {
             return  new ErrorsDTO(ex.getMessage(),LocalDateTime.now());
         }
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorsDTO handleUnauthorized(UnauthorizedException ex){
+        return  new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorsDTO handleGenericErrors(Exception ex){
+        return new ErrorsDTO("Errore lato server!!", LocalDateTime.now());
+    }
 }
