@@ -30,7 +30,7 @@ public class Dipendente {
     private String surname;
 
     private String email;
-
+// aggiunto l'attributo password per fare la verifica del dipendente
     private String password;
 
     private String avatarURL;
