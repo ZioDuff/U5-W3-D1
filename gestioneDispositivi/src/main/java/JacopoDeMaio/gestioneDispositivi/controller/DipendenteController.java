@@ -24,13 +24,7 @@ public class DipendenteController {
 
 //    REST
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Dipendente saveDipendente(@RequestBody @Validated DipendenteDTO payload, BindingResult validationResult){
-        if(validationResult.hasErrors()){
-            throw  new BadRequestException(validationResult.getAllErrors());
-        }else return dipendenteService.saveDipendente(payload);
-    }
+
 
     @GetMapping
     public Page<Dipendente> getDipendenteList(@RequestParam(defaultValue = "0") int page,

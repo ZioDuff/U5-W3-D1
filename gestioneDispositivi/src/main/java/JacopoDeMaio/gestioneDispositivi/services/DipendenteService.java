@@ -38,7 +38,7 @@ public class DipendenteService {
             throw  new BadRequestException("Attenzione! l'username: "+ payload.username() + " è gia in uso");
         });
 
-        Dipendente dipendente = new Dipendente(payload.username(), payload.name(),payload.surname(), payload.email());
+        Dipendente dipendente = new Dipendente(payload.username(), payload.name(),payload.surname(), payload.email(),payload.password());
 
         dipendente.setAvatarURL("https://ui-avatars.com/api/?name="+ payload.name()+ "+"+ payload.surname());
 
@@ -65,6 +65,7 @@ public class DipendenteService {
         found.setName(payload.getName());
         found.setSurname(payload.getSurname());
         found.setEmail(payload.getEmail());
+        found.setPassword(payload.getPassword());
         found.setAvatarURL("https://ui-avatars.com/api/?name="+ payload.getName()+ "+"+ payload.getSurname());
         return dipendenteRepository.save(found);
     }
@@ -81,5 +82,9 @@ public class DipendenteService {
         found.setAvatarURL(img);
         dipendenteRepository.save(found);
         return found;
+    }
+
+    public Dipendente findByEmail(String email){
+        return  dipendenteRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("il dipendente con email: " + email + " non è stato trovato"));
     }
 }
